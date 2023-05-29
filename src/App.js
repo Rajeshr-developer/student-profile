@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import LoginPage from "./components/Login";
+import DashBoard from "./components/DashBoard";
+import { GlobalStyle, RootClass } from "./styles/DashBoardStyle";
+import "./App.css";
 
 function App() {
+  const [currentState, setState] = useState("LOGIN");
+  const changeState = (param) => {
+    setState(param);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <RootClass className="App">
+        {currentState === "LOGIN" ? (
+          <LoginPage changeState={changeState} />
+        ) : (
+          <DashBoard />
+        )}
+      </RootClass>
+    </>
   );
 }
 
