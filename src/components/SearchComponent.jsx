@@ -12,13 +12,14 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import Profile from "./Profile";
 import { StudentTable } from "./StudentTable";
+import Config from "../config";
 
 export const SearchComponent = () => {
   const [studentProfile, setProfile] = useState([]);
   const [selectedProfile, setSelectedProfile] = useState(null);
   const searchForProfile = (e) => {
     fetch(
-      "http://localhost:3001/search?searchString=" +
+      `http://${Config.local.host}:${Config.local.port}/search?searchString=` +
         e.target.value.toLowerCase()
     )
       .then((response) => response.json())
@@ -33,14 +34,15 @@ export const SearchComponent = () => {
   };
 
   const downloadAsPdf = () => {
+    const fileName = selectedProfile.name.split(" ").join("-") || "profile";
     html2canvas(document.querySelector(".ProfileHeader")).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF();
-      pdf.addImage(imgData, "PNG", 0, 0, 210, 300);
-      pdf.save("profile.pdf");
+      pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
+      pdf.save(`${fileName}.pdf`);
     });
   };
-
+  console.log(selectedProfile);
   return (
     <>
       {

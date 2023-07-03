@@ -9,7 +9,6 @@ const ProfileHeader = styled.div`
   height: 1000px;
   margin-bottom: 10px;
   flex-direction: column;
-  border: 2px solid black;
 `;
 
 const CategoryHeader = styled.div`
@@ -26,35 +25,39 @@ const List = styled.li`
 
 const categories = [
   "1. Name of the Student",
-  "2. Name of the parent / guardian",
-  "3. Nationality, Religion",
-  "4. Community and Caste",
-  "5. Date of Birth",
-  "6. Gender",
-  "7. Date of Admission",
-  "8. Class in which the student was studying at the time of leaving",
-  "9. Whether qualified for promotion to a higher studies",
-  "10. Course of study details ",
+  "2. Father's Name",
+  "3. Nationality",
+  "4. Religion & Caste",
+  "5. Community",
+  "6. Date of Birth ( as entered in the &nsbp; Admission Register in Figures and Words )",
+  "7. (a) Couse to which the student was admitted & duration of the Course.",
+  "(b) Date of admission to the Course.",
+  "(c) Semester / year the student was studying at the time of leaving the institution",
+  "8. Whether qualified for promotion to the next higher class",
+  "9. Whether the student has paid all the fees due to the institution and cleared the dues",
+  "10. Whether the student was in receipt of any fee concession or scholarship, if so the nature of such concession or scholarship",
   "11. Date of which the student actually left the Institution",
-  "12. Reason for leaving",
-  "13. Conduct & Character",
+  "12. Date of application for Transfer Certificate",
+  "13. Extra - Curricular activities in which the student took part and proficiency therein",
+  "14. Character and Conduct",
 ];
 
 const answers = [
   "name",
   "parent",
   "nationality",
-  "community",
-  "dob",
-  "gender",
+  "Religion & Caste",
+  "Community",
+  "Date of Birth",
   "admission",
-  "class",
+  "Date of Admission",
+  "Semester",
   "qualified",
-  "majorSubject",
-  "firstLanguage",
-  "instructionMedium",
+  "fees paid",
+  "scholarship",
   "dateLeft",
-  "reason",
+  "dateOfTcApplied",
+  "extraCirricular",
   "conductCharacter",
 ];
 
@@ -65,11 +68,23 @@ const ListHeader = styled.div`
 const TitleHeader = styled.div`
   display: flex;
   width: 100%;
-  height: 23%;
+  height: 16%;
 `;
 
 const NameHeader = styled.div`
   width: 70%;
+`;
+
+const ProfileContent = styled.div`
+  font-weight: 600;
+  font-size: 1.5em;
+  color: darkblue;
+  font-family: serif;
+`;
+
+const ProfileSubContent = styled(ProfileContent)`
+  font-size: 0.9em;
+  font-family: sans-serif;
 `;
 
 const ProfilePictureHeader = styled.img`
@@ -79,8 +94,8 @@ const ProfilePictureHeader = styled.img`
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `;
 
-function ProfilePicture() {
-  return <ProfilePictureHeader src={require("../assets/profile.jpg")} />;
+function ProfilePicture({ pic }) {
+  return <ProfilePictureHeader src={pic} />;
 }
 
 function Profile({ profile }) {
@@ -89,21 +104,30 @@ function Profile({ profile }) {
       <TitleHeader>
         <Logo />
         <NameHeader>
-          <h2>SUGUNA COLLEGE OF ARTS & SCIENCE</h2>
-          <h3>(Affliated to Bharatiar University, Coimbatore)</h3>
-          <h3>
-            Civil Aerodrome Post, Nehru Nagar(W), kalapatti Road, Coimbatore -
-            641014, Tamilnadu
-          </h3>
+          <ProfileContent>SUGUNA COLLEGE OF ARTS & SCIENCE</ProfileContent>
+          <br></br>
+          <ProfileSubContent>
+            (Approved by Department of Higher Education, <br></br>Govt. of
+            Tamilnadu)
+          </ProfileSubContent>
+          <br></br>
+          <ProfileSubContent>
+            (Affliated to Bharathiar University, Coimbatore)<br></br>Civil
+            Aerodrome Post, Nehru Nagar, kalapatti Road, Coimbatore - 641014.
+          </ProfileSubContent>
         </NameHeader>
-        <ProfilePicture />
+        <ProfilePicture pic={profile.profilePic} />
       </TitleHeader>
+      <ProfileSubContent>T.C. No.</ProfileSubContent>
+      <ProfileSubContent>Registration No.</ProfileSubContent>
       <CategoryHeader>
         {categories.map((el, indx) => (
           <ListHeader>
-            <List>{el}</List>
+            <List>
+              <ProfileSubContent>{el}</ProfileSubContent>
+            </List>
             <List style={{ "padding-left": "30px" }}>
-              {profile[answers[indx]]}
+              <ProfileSubContent>{profile[answers[indx]]}</ProfileSubContent>
             </List>
           </ListHeader>
         ))}

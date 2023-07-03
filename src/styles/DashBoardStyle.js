@@ -116,12 +116,12 @@ export const BackButton = styled.button`
   margin-left: 20px;
   align-self: flex-start;
   /*TYPE*/
-  color: #fff;
   font-size: 24px;
   font-family: "Nunito", sans-serif;
   text-decoration: none;
   text-align: center;
-  background: rgb(30 74 108);
+  background: none;
+  border: none;
   cursor: pointer;
 `;
 
@@ -195,7 +195,7 @@ export const FileUploadTitle = styled.div`
   width: ${(props) => (props.width ? props.width : "13%")};
   margin-top: 4%;
   text-align: left;
-  margin-bottom: 10%;
+  margin-bottom: 4%;
   border-bottom: 5px solid rgba(0, 0, 0, 0.45);
   border-radius: 5px;
 `;

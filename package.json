@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@cnakazawa/watch": "^1.0.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -21,7 +22,7 @@
     "styled-components": "^5.0.0",
     "web-vitals": "^1.0.1",
     "webpack": "^4.44.2",
-    "webpack-dev-server": "^3.1.14",
+    "webpack-dev-server": "latest",
     "xlsx": "^0.18.5"
   },
   "scripts": {

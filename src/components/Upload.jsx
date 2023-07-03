@@ -8,6 +8,7 @@ import {
   FileUploadRoot,
   UploadInput,
 } from "../styles/DashBoardStyle";
+import Config from "../config";
 
 export const Upload = () => {
   const inputRef = useRef(null);
@@ -23,7 +24,10 @@ export const Upload = () => {
       redirect: "follow",
     };
 
-    fetch("http://localhost:3001/uploadcsv", requestOptions)
+    fetch(
+      `http://${Config.local.host}:${Config.local.port}/uploadcsv`,
+      requestOptions
+    )
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
