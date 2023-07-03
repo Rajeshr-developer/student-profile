@@ -6,7 +6,7 @@ This project was bootstrapped with [Create NW.js React App](https://github.com/n
 
 In the project directory, you can run:
 
-### `yarn start`
+### `npm run start-web`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
