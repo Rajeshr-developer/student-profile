@@ -3,7 +3,6 @@ import styled, { createGlobalStyle } from "styled-components";
 export const DashBoardHeader = styled.div`
   margin: 0 auto;
   width: 30%;
-  height: 100vh;
   float: left;
   border: 3px solid green;
   box-shadow: 3px 3px 4px #9f85852b;
@@ -247,7 +246,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: Roboto, Helvetica, sans-serif;
   }
   body {
-    height: 100%;
+    min-height: 100%;
     // background: linear-gradient(90deg, #C7C5F4, #776BCC);
   }
 `;

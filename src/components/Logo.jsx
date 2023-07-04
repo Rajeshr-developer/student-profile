@@ -6,6 +6,11 @@ const LogoHeader = styled.img`
   width: 100px;
   padding: 10px;
   ${(props) => props.marginTop && "margin-top: 10%;"}
+  transition: transform 250ms;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 function Logo(props) {

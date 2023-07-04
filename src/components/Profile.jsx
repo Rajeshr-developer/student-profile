@@ -1,17 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "./Logo";
+import moment from "moment/moment";
 
 const ProfileHeader = styled.div`
   display: flex;
   margin: auto;
   width: 800px;
-  height: 1000px;
   margin-bottom: 10px;
   flex-direction: column;
 `;
 
 const CategoryHeader = styled.div`
+  margin-top: 10px;
   width: 100%;
 `;
 
@@ -29,7 +30,7 @@ const categories = [
   "3. Nationality",
   "4. Religion & Caste",
   "5. Community",
-  "6. Date of Birth ( as entered in the &nsbp; Admission Register in Figures and Words )",
+  "6. Date of Birth ( as entered in the Admission Register in Figures and Words )",
   "7. (a) Couse to which the student was admitted & duration of the Course.",
   "(b) Date of admission to the Course.",
   "(c) Semester / year the student was studying at the time of leaving the institution",
@@ -46,14 +47,14 @@ const answers = [
   "name",
   "parent",
   "nationality",
-  "Religion & Caste",
-  "Community",
-  "Date of Birth",
+  "religion",
+  "community",
+  "dob",
   "admission",
-  "Date of Admission",
-  "Semester",
+  "dateofadmission",
+  "semester",
   "qualified",
-  "fees paid",
+  "feespaid",
   "scholarship",
   "dateLeft",
   "dateOfTcApplied",
@@ -69,6 +70,21 @@ const TitleHeader = styled.div`
   display: flex;
   width: 100%;
   height: 16%;
+`;
+
+const TitleSubHeader = styled(TitleHeader)`
+  height: 50px;
+  align-items: center;
+  display: flex;
+  width: 100%;
+`;
+
+const TcTitle = styled.text`
+  margin-left: 165px;
+  color: darkblue;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 1.4em;
 `;
 
 const NameHeader = styled.div`
@@ -87,18 +103,25 @@ const ProfileSubContent = styled(ProfileContent)`
   font-family: sans-serif;
 `;
 
-const ProfilePictureHeader = styled.img`
-  height: 120px;
-  width: 130px;
-  padding: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+const SubHeaders = styled(ProfileSubContent)`
+  padding-left: ${(props) => props.left || "5%"};
+  text-align: left;
 `;
 
-function ProfilePicture({ pic }) {
-  return <ProfilePictureHeader src={pic} />;
-}
+// const ProfilePictureHeader = styled.img`
+//   height: 120px;
+//   width: 130px;
+//   padding: 10px;
+//   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+// `;
+
+// function ProfilePicture({ pic }) {
+//   return <ProfilePictureHeader src={pic} />;
+// }
 
 function Profile({ profile }) {
+  const dateObj = ["dateLeft", "dateOfTcApplied", "dateofadmission", "dob"];
+  console.log(profile);
   return (
     <ProfileHeader className="ProfileHeader">
       <TitleHeader>
@@ -116,10 +139,16 @@ function Profile({ profile }) {
             Aerodrome Post, Nehru Nagar, kalapatti Road, Coimbatore - 641014.
           </ProfileSubContent>
         </NameHeader>
-        <ProfilePicture pic={profile.profilePic} />
+        {/* <ProfilePicture pic={profile.profilePic} /> */}
       </TitleHeader>
-      <ProfileSubContent>T.C. No.</ProfileSubContent>
-      <ProfileSubContent>Registration No.</ProfileSubContent>
+      <TitleSubHeader>
+        <SubHeaders>T.C. No.</SubHeaders>
+        <TcTitle>TRANSFER CERTIFICATE</TcTitle>
+      </TitleSubHeader>
+      <TitleSubHeader>
+        <SubHeaders>Registration No.</SubHeaders>
+        <SubHeaders left={"340px"}>Date: </SubHeaders>
+      </TitleSubHeader>
       <CategoryHeader>
         {categories.map((el, indx) => (
           <ListHeader>
@@ -127,7 +156,13 @@ function Profile({ profile }) {
               <ProfileSubContent>{el}</ProfileSubContent>
             </List>
             <List style={{ "padding-left": "30px" }}>
-              <ProfileSubContent>{profile[answers[indx]]}</ProfileSubContent>
+              <ProfileSubContent>
+                {dateObj.includes(answers[indx])
+                  ? moment(profile[answers[indx]])
+                      .utc()
+                      .format("DD / MM / YYYY")
+                  : profile[answers[indx]]}
+              </ProfileSubContent>
             </List>
           </ListHeader>
         ))}
