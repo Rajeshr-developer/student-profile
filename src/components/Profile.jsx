@@ -5,7 +5,6 @@ import moment from "moment/moment";
 
 const ProfileHeader = styled.div`
   display: flex;
-  margin: auto;
   width: 800px;
   margin-bottom: 10px;
   flex-direction: column;
@@ -18,7 +17,7 @@ const CategoryHeader = styled.div`
 
 const List = styled.li`
   width: 400px;
-  height: 50px;
+  margin-top: 30px;
   padding-left: 5%;
   text-align: left;
   list-style-type: none;
@@ -67,13 +66,15 @@ const ListHeader = styled.div`
 `;
 
 const TitleHeader = styled.div`
+  margin-top: 50px;
   display: flex;
   width: 100%;
-  height: 16%;
+  height: 10%;
 `;
 
 const TitleSubHeader = styled(TitleHeader)`
-  height: 50px;
+  justify-content: ${(props) => props.justify || "left"};
+  height: ${(props) => props.height || "50px"};
   align-items: center;
   display: flex;
   width: 100%;
@@ -105,6 +106,7 @@ const ProfileSubContent = styled(ProfileContent)`
 
 const SubHeaders = styled(ProfileSubContent)`
   padding-left: ${(props) => props.left || "5%"};
+  padding-right: ${(props) => props.right || "0"};
   text-align: left;
 `;
 
@@ -145,9 +147,11 @@ function Profile({ profile }) {
         <SubHeaders>T.C. No.</SubHeaders>
         <TcTitle>TRANSFER CERTIFICATE</TcTitle>
       </TitleSubHeader>
-      <TitleSubHeader>
+      <TitleSubHeader justify="space-between">
         <SubHeaders>Registration No.</SubHeaders>
-        <SubHeaders left={"340px"}>Date: </SubHeaders>
+        <SubHeaders right={"200px"} left={"0"}>
+          Date:{" "}
+        </SubHeaders>
       </TitleSubHeader>
       <CategoryHeader>
         {categories.map((el, indx) => (
@@ -167,6 +171,9 @@ function Profile({ profile }) {
           </ListHeader>
         ))}
       </CategoryHeader>
+      <TitleSubHeader height={"200px"} justify={"center"}>
+        <SubHeaders left={"200px"}>PRINCIPAL</SubHeaders>
+      </TitleSubHeader>
     </ProfileHeader>
   );
 }
