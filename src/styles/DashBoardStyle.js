@@ -10,6 +10,7 @@ export const DashBoardHeader = styled.div`
 `;
 
 export const DashBoardLayout = styled.div`
+  height: 100%;
   width: 100%;
   display: flex;
 `;
@@ -29,7 +30,6 @@ export const TableHead = styled.table`
   align-self: flex-start;
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 35%;
   margin-left: 30px;
   td,
   th {
@@ -78,6 +78,11 @@ export const StyledLabel = styled.label`
   }
 `;
 
+export const UL = styled.li`
+  display: flex;
+  flex-flow: wrap;
+`;
+
 export const List = styled.li`
   margin: 10px 10px 10px 10px;
   border-radius: 0.3rem;
@@ -87,15 +92,18 @@ export const List = styled.li`
   border-color: #007bff;
   font-size: 1.2em;
   font-weight: 600;
-  height: 100%;
   line-height: 58px;
-  width: 90%;
+  width: ${(props) => props.width || `90%`};
   list-style-type: none;
   cursor: pointer;
   :hover {
     background-color: #007bff;
     color: #fff;
   }
+`;
+
+export const DepartmentList = styled.li`
+  display: block;
 `;
 
 export const SearchBarContainer = styled.div`
@@ -199,6 +207,13 @@ export const FileUploadTitle = styled.div`
   border-radius: 5px;
 `;
 
+export const DepartmentTitle = styled.div`
+  margin-left: 4%;
+  align-self: flex-start;
+  width: ${(props) => (props.width ? props.width : "13%")};
+  text-align: left;
+`;
+
 export const FileUploadHeader = styled.div`
   border-radius: 10px;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
@@ -242,13 +257,15 @@ export const UploadInput = styled.input`
 
 export const GlobalStyle = createGlobalStyle`
   html {
-    min-height: 100%;
+    height: 100%;
     font-family: Roboto, Helvetica, sans-serif;
   }
   body {
-    min-height: 100%;
+    height: 100vh;
     // background: linear-gradient(90deg, #C7C5F4, #776BCC);
   }
 `;
 
-export const RootClass = styled.div``;
+export const RootClass = styled.div`
+  height: 100%;
+`;

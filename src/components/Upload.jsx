@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import {
   ChooseFile,
@@ -9,14 +9,18 @@ import {
   UploadInput,
 } from "../styles/DashBoardStyle";
 import Config from "../config";
+import data from "../globalData";
 
 export const Upload = () => {
   const inputRef = useRef(null);
-
+  const [defaultVal, setDefaultVal] = useState("B.com");
   const postCSV = (__data) => {
+    const customData = __data.map((el) => {
+      return { ...el, department: defaultVal };
+    });
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    const raw = JSON.stringify(__data);
+    const raw = JSON.stringify(customData);
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -62,8 +66,17 @@ export const Upload = () => {
       <FileUploadHeader>
         <FileUploaderSubBox>
           <header>
-            <h4>Select File here</h4>
+            <h4>Select Department here</h4>
           </header>
+          <select
+            onChange={(e) => {
+              setDefaultVal(e.target.value);
+            }}
+          >
+            {data.departments.map((el) => (
+              <option value={el}>{el}</option>
+            ))}
+          </select>
           <p>Files Supported: Xlsx, xls</p>
           <UploadInput
             ref={inputRef}
